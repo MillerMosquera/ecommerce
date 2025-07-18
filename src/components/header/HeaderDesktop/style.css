@@ -1,0 +1,56 @@
+.header_submenu{
+    background-color: white;
+    position: absolute;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 3px;
+    border-bottom: 1px solid #9999;
+    cursor: pointer;
+}
+
+.header_container_left{
+    width: 50%;
+}
+.header_container .header_items {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    font-size: 14px;
+    width: 100%;
+    justify-content: space-around;
+    gap:10px;
+}
+.header_container .header_items .header_item{
+    color: #727273;
+}
+.header_logo-desktop{
+    width: 180px;
+}
+.header_container_right{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+.header_container_search{
+    color: #727273;
+    background-color: white;
+    border: .125rem solid #e3e4e6;
+    border-radius: .25rem;
+    
+}
+.header_input_search{
+    padding: 1px 16px;
+    font-size: 14px;
+}
+.header_button_search{
+    border: none;
+    background: none;
+    padding: 1px 16px 1px 12px;
+    cursor: pointer;
+}
+.header_sign_in{
+    font-size: 14px;
+    color: #727273;
+}

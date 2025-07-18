@@ -1,0 +1,13 @@
+.header_container{
+    position: sticky;
+    padding: .625rem .5rem;
+    background-color: #f0f0f0;
+    height: 84px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999999;
+}
