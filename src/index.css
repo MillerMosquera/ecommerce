@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Tus estilos originales - SIN MODIFICACIONES */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -14,23 +13,4 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Clases personalizadas para el carrito (se activan con className) */
-.cart-slide-in {
-  animation: slideIn 0.3s ease-out forwards;
-}
-
-.cart-fade-in {
-  animation: fadeIn 0.2s ease-in;
-}
-
-@keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }

@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import './style.css'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react';
+import { useState } from 'react';
+import './style.css';
 
-export default function HeaderDesktop({ items, cart }) {
+export default function HeaderDesktop({ items, itemCount, onCartClick }) {
   const [state, setState] = useState(null);
   
   return (
@@ -47,74 +47,17 @@ export default function HeaderDesktop({ items, cart }) {
             </svg>
           </button>
         </div>
-        
         <button className='header_item header_sign_in'>SIGN IN</button>
-        
         <div className="header_cart_container">
           <button 
             className='header_item header_cart_button'
-            onClick={() => cart.setIsCartOpen(!cart.isCartOpen)}
+            onClick={() => onCartClick && onCartClick()}
           >
             <ShoppingCart />
-            {cart.totalItems > 0 && (
-              <span className="header_cart_badge">{cart.totalItems}</span>
-            )}
+            {itemCount > 0 && (
+              <span className="header_cart_badge">{itemCount}</span>
+            )}        
           </button>
-          
-          {cart.isCartOpen && (
-            <div className="header_cart_dropdown">
-              <div className="header_cart_header">
-                <h3>Your Cart</h3>
-                <button onClick={() => cart.setIsCartOpen(false)}>×</button>
-              </div>
-              
-              {cart.cartItems.length === 0 ? (
-                <div className="header_cart_empty">Your cart is empty</div>
-              ) : (
-                <>
-                  <div className="header_cart_items">
-                    {cart.cartItems.map(item => (
-                      <div key={item.id} className="header_cart_item">
-                        <div className="header_cart_item_image">
-                          <img src={item.image} alt={item.name} />
-                        </div>
-                        <div className="header_cart_item_details">
-                          <h4>{item.name}</h4>
-                          <p>${item.price.toFixed(2)}</p>
-                          <div className="header_cart_item_quantity">
-                            <button 
-                              onClick={() => cart.updateQuantity(item.id, item.quantity - 1)} 
-                              disabled={item.quantity <= 1}
-                            >
-                              -
-                            </button>
-                            <span>{item.quantity}</span>
-                            <button onClick={() => cart.updateQuantity(item.id, item.quantity + 1)}>
-                              +
-                            </button>
-                          </div>
-                        </div>
-                        <button 
-                          className="header_cart_item_remove" 
-                          onClick={() => cart.removeFromCart(item.id)}
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="header_cart_footer">
-                    <div className="header_cart_total">
-                      <span>Total:</span>
-                      <span>${cart.totalPrice.toFixed(2)}</span>
-                    </div>
-                    <button className="header_cart_checkout">Checkout</button>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
         </div>
       </div>
     </>

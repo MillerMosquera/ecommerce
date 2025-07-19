@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { Menu, ShoppingCart, X } from 'lucide-react';
+import { useState } from 'react';
 import './style.css';
 
-export default function HeaderMobile({ items }) {
+export default function HeaderMobile({ items, itemCount, onCartClick }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   return (
@@ -25,10 +25,12 @@ export default function HeaderMobile({ items }) {
       <div className="header_mobile_cart">
         <button 
           className="header_mobile_cart_button"
+          onClick={() => onCartClick && onCartClick()}
         >
           <ShoppingCart size={24} />
-            <span className="header_mobile_cart_badge">cart</span>
-          
+          {itemCount > 0 && (
+            <span className="header_mobile_cart_badge">{itemCount}</span>
+          )}
         </button>
       </div>
       
@@ -51,64 +53,6 @@ export default function HeaderMobile({ items }) {
               </li>
             ))}
           </ul>
-        </div>
-      )}
-      
-      {/* Carrito móvil */}
-      {cart.isCartOpen && (
-        <div className="header_mobile_cart_drawer">
-          <div className="header_mobile_cart_header">
-            <h3>Your Cart</h3>
-            <button onClick={() => cart.setIsCartOpen(false)}>
-              <X size={24} />
-            </button>
-          </div>
-          
-          {cart.cartItems.length === 0 ? (
-            <div className="header_mobile_cart_empty">Your cart is empty</div>
-          ) : (
-            <>
-              <div className="header_mobile_cart_items">
-                {cart.cartItems.map(item => (
-                  <div key={item.id} className="header_mobile_cart_item">
-                    <div className="header_mobile_cart_item_image">
-                      <img src={item.image} alt={item.name} />
-                    </div>
-                    <div className="header_mobile_cart_item_details">
-                      <h4>{item.name}</h4>
-                      <p>${item.price.toFixed(2)}</p>
-                      <div className="header_mobile_cart_item_quantity">
-                        <button 
-                          onClick={() => cart.updateQuantity(item.id, item.quantity - 1)} 
-                          disabled={item.quantity <= 1}
-                        >
-                          -
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button onClick={() => cart.updateQuantity(item.id, item.quantity + 1)}>
-                          +
-                        </button>
-                      </div>
-                    </div>
-                    <button 
-                      className="header_mobile_cart_item_remove" 
-                      onClick={() => cart.removeFromCart(item.id)}
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="header_mobile_cart_footer">
-                <div className="header_mobile_cart_total">
-                  <span>Total:</span>
-                  <span>${cart.totalPrice.toFixed(2)}</span>
-                </div>
-                <button className="header_mobile_cart_checkout">Checkout</button>
-              </div>
-            </>
-          )}
         </div>
       )}
     </div>

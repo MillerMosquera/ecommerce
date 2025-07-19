@@ -54,3 +54,31 @@
     font-size: 14px;
     color: #727273;
 }
+
+.header_cart_container {
+    position: relative;
+}
+
+.header_cart_button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #727273;
+    position: relative;
+}
+
+.header_cart_badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}

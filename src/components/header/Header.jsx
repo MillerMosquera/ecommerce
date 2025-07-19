@@ -1,8 +1,8 @@
 //import {useDevice} from '../hooks/useDevice'
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import './Header.css';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
-import './Header.css';
 
 const items = [{
     id:0,
@@ -37,14 +37,15 @@ function useDevice() {
     return windowSize
 };
 
-export default function Header() {
+export default function Header({ itemCount, onCartClick }) {
     const windowSize = useDevice();
    
     return(
         <header className='header_container'>
-            {windowSize > 900 ? <HeaderDesktop items={items}/>
-            : <HeaderMobile items={items} /> }
-            
+            {windowSize > 900 ? 
+                <HeaderDesktop items={items} itemCount={itemCount} onCartClick={onCartClick}/> :
+                <HeaderMobile items={items} itemCount={itemCount} onCartClick={onCartClick} /> 
+            }
         </header>
     )
 }
