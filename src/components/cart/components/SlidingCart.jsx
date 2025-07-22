@@ -36,7 +36,7 @@ export const SlidingCart = ({
                         onClick={onClose}
                         className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                     >
-                        <X className="h-5 w-5" />
+                        <X className="h-5 w-5 text-red-600" />
                     </button>
                 </div>
 

@@ -21,11 +21,9 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
                 <div className="flex justify-between items-start">
                     <div>
                         <p className="text-sm font-medium text-blue-600 uppercase tracking-wide">
-                            KAWASAKI
-                        </p>
-                        <h3 className="text-sm font-medium text-gray-900 mt-1">
                             {item.name}
-                        </h3>
+                        </p>
+                    
                     </div>
                     <button
                         onClick={handleRemove}
@@ -60,14 +58,15 @@ export const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
 
                     {/* Price */}
                     <div className="text-right">
-                        {item.isFree ? (
+                        {(Number(item.price) * item.quantity) === 0 ? (
                             <span className="text-sm text-green-600 font-medium">FREE</span>
                         ) : (
                             <span className="text-sm font-semibold text-gray-900">
-                                ${item.price.toFixed(2)}
+                                ${(Number(item.price) * item.quantity).toFixed(2)}
                             </span>
                         )}
                     </div>
+
                 </div>
             </div>
         </div>
