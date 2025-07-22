@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import Home from './pages/Home';
 import { SlidingCart } from './components/cart/components/SlidingCart';
 import Accesorios from './pages/Accesorios';
+import WrapCategories from './pages/WrapCategories';
 import { useCart } from './components/cart/hooks/useCart';
 
 function App() {
@@ -28,7 +29,9 @@ function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/accesorios" element={<Accesorios />} />
+          <Route path="/accesorios/" element={<Accesorios />} />
+          <Route path="/ropa-accesorios/:subcategoria?" element={<WrapCategories title="Ropa y accesorios" />} />
+          <Route path="/hogar-decoracion/:subcategoria?" element={<WrapCategories title="Hogar y decoración" />} />
         </Routes>
       </main>
       <Footer />

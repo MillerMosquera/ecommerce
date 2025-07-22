@@ -6,7 +6,7 @@ import ProductGrid from "../products/ProductGrid";
 import SidebarFilters from "../products/SidebarFilter";
 import ToolbarControls from "../products/ToolbarControls";
 
-export default function ApparelStore() {
+export default function Plp(props) {
     const [viewMode, setViewMode] = useState('grid');
     const [selectedSizes, setSelectedSizes] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -19,9 +19,18 @@ export default function ApparelStore() {
         test: true,
         subcategory: true
     });
+    
 
+    let filtered = []
+ 
+  if (props.subcategoria) {
+    filtered = products.filter(item => item.categories === `ropa-accesorios/${props.subcategoria}`)
+  } else {
+    filtered = products.filter(item => item.categories?.startsWith('ropa-accesorios/'))
+  }
+    console.log('filtered', filtered, props)
     const filteredProducts = useFilters(
-        products,
+        filtered,
         selectedSizes,
         selectedCategories,
         selectedBrands,
@@ -61,13 +70,15 @@ export default function ApparelStore() {
     return (
         <div className="max-w-7xl mx-auto px-4 py-8">
             <div className="flex items-center space-x-2 text-sm text-gray-500 mb-6">
-                <span>🏠</span>
+                <a href="/">🏠</a>
                 <span>/</span>
-                <span>Tienda de moda </span>
+                <a href={`/${props.title}`}>{props.title}</a>
+                <span>/</span>
+                {props.subcategoria ? <a href={`/${props.title}/${props.subcategoria}`}>{props.subcategoria}</a>: null}
             </div>
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
-                <h1 className="text-3xl font-bold">Ropa y Accesorios </h1>
+                <h1 className="text-3xl font-bold">{props.subcategoria === undefined ? props.title.toUpperCase() : props.subcategoria.toUpperCase()}</h1>
             </div>
             <div className="flex gap-8">
 
@@ -104,3 +115,4 @@ export default function ApparelStore() {
 
     );
 }
+
