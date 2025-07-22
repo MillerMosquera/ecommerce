@@ -1,35 +1,58 @@
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { ShoppingCart } from 'lucide-react';
-
 import './style.css';
 
-export default function HeaderDesktop({ items, itemCount, onCartClick }) {
-  const [state, setState] = useState(null);
+export default function HeaderDesktop({ items, onCartClick }) {
+  const [hovered, setHovered] = useState(null);
+  const [totalItems, setTotalItems] = useState(0);
+
+  // ✅ Leer el carrito desde localStorage al cargar el componente
+  useEffect(() => {
+    const updateCartCount = () => {
+      const stored = JSON.parse(localStorage.getItem("cart")) || [];
+      const count = stored.reduce((sum, item) => sum + item.quantity, 0);
+      setTotalItems(count);
+    };
+
+    updateCartCount(); // Llamar al iniciar
+
+    // ✅ Escuchar cambios del carrito a través del evento personalizado
+    window.addEventListener("cartUpdated", updateCartCount);
+
+    // Limpiar el listener al desmontar
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+    };
+  }, []);
 
   return (
     <>
       <nav className='header_container_left'>
-        <ul className='header_items' onMouseLeave={() => setState(null)}>
+        <ul className='header_items' onMouseLeave={() => setHovered(null)}>
           <li className='header_item header_logo-desktop'>
-            <img src="https://storecomponents.vtexassets.com/arquivos/store-theme-logo.png" alt="Logo" />
+            <img
+              src="https://storecomponents.vtexassets.com/arquivos/store-theme-logo.png"
+              alt="Logo"
+            />
           </li>
 
           {items?.map((item, index) => (
-            <li 
-              className='header_item' 
-              onMouseOver={() => setState(index)}
+            <li
+              className='header_item'
+              onMouseOver={() => setHovered(index)}
               key={item.id}
             >
-               <Link to={item.url}> <button>{item.label}</button></Link>
-              {state === index && item.submenu.length > 0 && (
+              <Link to={item.url}>
+                <button>{item.label}</button>
+              </Link>
+              {hovered === index && item.submenu.length > 0 && (
                 <ul className='header_submenu'>
-                  {item.submenu.map((item2) => (
-                    <li className='header_submenu_item' key={item2.url}>
-                        <Link to={item2.url}> <button>{item2.label}</button></Link>
-                     
+                  {item.submenu.map((sub) => (
+                    <li className='header_submenu_item' key={sub.url}>
+                      <Link to={sub.url}>
+                        <button>{sub.label}</button>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -38,13 +61,13 @@ export default function HeaderDesktop({ items, itemCount, onCartClick }) {
           ))}
         </ul>
       </nav>
-      
+
       <div className="header_container_right">
         <div className="header_container_search">
-          <input 
-            className='header_item header_input_search' 
-            type="text" 
-            placeholder="Buscar" 
+          <input
+            className='header_item header_input_search'
+            type="text"
+            placeholder="Buscar"
           />
           <button className='header_button_search'>
             <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000">
@@ -52,19 +75,21 @@ export default function HeaderDesktop({ items, itemCount, onCartClick }) {
             </svg>
           </button>
         </div>
-        <button className='header_item header_sign_in'>Iniciar sesion</button>
+
+        <button className='header_item header_sign_in'>Iniciar sesión</button>
+
         <div className="header_cart_container">
-          <button 
+          <button
             className='header_item header_cart_button'
-            onClick={() => onCartClick && onCartClick()}
+            onClick={onCartClick}
           >
             <ShoppingCart />
-            {itemCount > 0 && (
-              <span className="header_cart_badge">{itemCount}</span>
-            )}        
+            {totalItems > 0 && (
+              <span className="header_cart_badge">{totalItems}</span>
+            )}
           </button>
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -8,6 +8,7 @@ import Accesorios from './pages/Accesorios';
 import WrapCategories from './pages/WrapCategories';
 import { useCart } from './components/cart/hooks/useCart';
 
+
 function App() {
   const {
     isCartOpen,

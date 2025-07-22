@@ -1,20 +1,13 @@
-import { useState } from "react";
+import { useCart } from "./hooks/useCart";
 import Header from "../header/Header.jsx";
 import { SlidingCart } from "./components/SlidingCart.jsx";
 
 export const Cart = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const rawCart = localStorage.getItem("cart");
-  const cartItems = rawCart ? JSON.parse(rawCart) : [];
-
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  const handleOpenCart = () => setIsCartOpen(true);
+  const { isCartOpen, handleOpenCart, handleCloseCart, totalItems } = useCart();
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header 
+      <Header
         itemCount={totalItems}
         onCartClick={handleOpenCart}
       />
@@ -25,6 +18,8 @@ export const Cart = () => {
           <p className="text-gray-600">Haz clic en el ícono del carrito para ver tus productos</p>
         </div>
       </main>
+
+      <SlidingCart isOpen={isCartOpen} onClose={handleCloseCart} />
     </div>
   );
 };

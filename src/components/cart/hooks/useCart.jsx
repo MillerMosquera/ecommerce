@@ -1,54 +1,70 @@
-// hooks/useCart.jsx
-import { useState } from 'react';
-import {getCart} from '../utils/cartUtils';
+  import { useEffect, useState } from 'react';
 
-export const useCart = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  export const useCart = () => {
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [cartItems, setCartItems] = useState(() => {
+      const stored = localStorage.getItem("cart");
+      return stored ? JSON.parse(stored) : [];
+    });
 
-  const cartItems = getCart();
+    // 🔁 Sincroniza cambios locales con localStorage
+    useEffect(() => {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }, [cartItems]);
 
-  const [setCartItems] = useState(() => {
-    const stored = localStorage.getItem("cart");
-    return stored ? JSON.parse(stored) : [];
-  });
+    // 🔔 Escucha cambios del carrito desde otras partes de la app
+    useEffect(() => {
+      const handleStorageChange = () => {
+        const stored = localStorage.getItem("cart");
+        setCartItems(stored ? JSON.parse(stored) : []);
+      };
 
-  // Guardar el carrito en localStorage cada vez que cambia
- 
+      window.addEventListener("cartUpdated", handleStorageChange);
 
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+      return () => {
+        window.removeEventListener("cartUpdated", handleStorageChange);
+      };
+    }, []);
 
-  const handleOpenCart = () => setIsCartOpen(true);
-  const handleCloseCart = () => setIsCartOpen(false);
+    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  const handleUpdateQuantity = (id, newQuantity) => {
-    if (newQuantity <= 0) {
-      setCartItems(cartItems.filter(item => item.id !== id));
-    } else {
-      setCartItems(cartItems.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      ));
-    }
+    const handleOpenCart = () => setIsCartOpen(true);
+    const handleCloseCart = () => setIsCartOpen(false);
+
+    const handleUpdateQuantity = (id, newQuantity) => {
+      const updated = newQuantity <= 0
+        ? cartItems.filter(item => item.id !== id)
+        : cartItems.map(item =>
+            item.id === id ? { ...item, quantity: newQuantity } : item
+          );
+
+      setCartItems(updated);
+      localStorage.setItem("cart", JSON.stringify(updated));
+      window.dispatchEvent(new Event("cartUpdated")); // 🔔
+    };
+
+    const handleRemoveItem = (id) => {
+      const updated = cartItems.filter(item => item.id !== id);
+      setCartItems(updated);
+      localStorage.setItem("cart", JSON.stringify(updated));
+      window.dispatchEvent(new Event("cartUpdated")); // 🔔
+    };
+
+    const handleCheckout = () => {
+      alert('Ir al checkout...');
+      // setCartItems([]);
+      // localStorage.removeItem("cart");
+      // window.dispatchEvent(new Event("cartUpdated"));
+    };
+
+    return {
+      isCartOpen,
+      cartItems,
+      totalItems,
+      handleOpenCart,
+      handleCloseCart,
+      handleUpdateQuantity,
+      handleRemoveItem,
+      handleCheckout
+    };
   };
-
-  const handleRemoveItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
-
-  const handleCheckout = () => {
-    alert('Ir al checkout...');
-    // Opcional: limpiar carrito después del checkout
-    // setCartItems([]);
-    // localStorage.removeItem("carrito");
-  };
-
-  return {
-    isCartOpen,
-    cartItems,
-    totalItems,
-    handleOpenCart,
-    handleCloseCart,
-    handleUpdateQuantity,
-    handleRemoveItem,
-    handleCheckout
-  };
-};
