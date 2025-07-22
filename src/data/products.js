@@ -6,10 +6,11 @@ export const products = [
     price: 35000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/ropa",
     category: "Camisetas",
     brand: "Nike",
     size: ["39", "40", "41"],
-    season: "Summer",
+    season: "verano",
     featured: true
   },
   {
@@ -19,10 +20,11 @@ export const products = [
     price: 85000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/ropa",
     category: "Jeans",
     brand: "Studio F",
     size: ["One Size"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 3,
@@ -31,10 +33,11 @@ export const products = [
     price: 120000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/ropa",
     category: "Zapatos",
     brand: "Adidas",
     size: ["One Size"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 4,
@@ -43,10 +46,11 @@ export const products = [
     price: 150000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/ropa",
     category: "Chaquetas",
     brand: "Prada",
     size: ["S", "M", "L"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 5,
@@ -55,10 +59,11 @@ export const products = [
     price: 25000,
     rating: 3,
     discount: "Save 16.04",
+    categories: "ropa-accesorios/accesorios",
     category: "Gorra",
     brand: "Gold Caps",
     size: ["S", "M", "L", "XL"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 6,
@@ -67,10 +72,11 @@ export const products = [
     price: 68000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/accesorios",
     category: "Bolso",
     brand: "Chanel",
     size: ["XS", "S", "M", "L"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 7,
@@ -79,10 +85,11 @@ export const products = [
     price: 98000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/accesorios",
     category: "Accessorios",
     brand: "GMC",
     size: ["One Size"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 8,
@@ -91,10 +98,11 @@ export const products = [
     price: 42000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/gafas",
     category: "Lentes",
     brand: "Chanel",
     size: ["S", "M", "L", "XL"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 9,
@@ -103,10 +111,11 @@ export const products = [
     price: 110000,
     rating: 3,
     discount: "Ahorra 16.04",
+    categories: "ropa-accesorios/accesorios",
     category: "Carteras",
     brand: "Louis Vuitton",
     size: ["S", "M", "L", "XL"],
-    season: "Summer"
+    season: "verano"
   },
   {
     id: 10,
@@ -115,33 +124,62 @@ export const products = [
     price: 90000,
     rating: 3,
     discount: "Ahorra 10.00",
+    categories: "ropa-accesorios/ropa",
     category: "Vestido de Baño",
     brand: "Leonisa",
     size: ["S", "M", "L", "XL"],
-    season: "Summer"
+    season: "verano"
   },
-    {
+  {
     id: 11,
     name: "Bufanda",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg8saiHATYZlrHMpwC9WZaq07qeMqeHs7I3Q&s",
     price: 110000,
     rating: 3,
     discount: "Ahorra 10.00",
+    categories: "ropa-accesorios/accesorios",
     category: "Bufanda",
     brand: "Celine",
     size: ["S", "M", "L", "XL"],
-    season: "Summer"
+    season: "verano"
   },
-    {
+  {
     id: 12,
     name: "Chancletas",
     image: "https://static.dafiti.com.co/p/puma-5896-2072812-4-zoom.jpg",
     price: 120000,
     rating: 3,
     discount: "Ahorra 10.00",
+    categories: "ropa-accesorios/ropa",
     category: "Chancletas",
     brand: "Puma",
     size: ["S", "M", "L", "XL"],
-    season: "Summer"
+    season: "verano"
+  },
+  {
+    id: 13,
+    name: "Reloj",
+    image: "https://img-1.kwcdn.com/product/fancy/7d1a29b6-5f34-4083-b58b-01da11b8bf6c.jpg?imageView2/2/w/800/q/70/format/webp",
+    price: 35769,
+    rating: 4,
+    discount: "Ahorra 59.00",
+    categories: "hogar-decoracion",
+    category: "Reloj",
+    brand: "Seiko",
+    size: ["20cm", "22cm"],
+    season: "verano"
+  },
+  {
+    id: 14,
+    name: "Silla",
+    image: "https://media.falabella.com/sodimacCO/878516_01/w=1154,h=832,f=webp,fit=contain,q=85",
+    price: 349900,
+    rating: 4,
+    discount: "Ahorra 10.00",
+    categories: "hogar-decoracion/",
+    category: "Silla",
+    brand: "Velvet",
+    size: ["58"],
+    season: "verano"
   }
 ];
