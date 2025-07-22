@@ -6,22 +6,22 @@ import HeaderMobile from './HeaderMobile';
 
 const items = [{
     id:0,
-    url: "/",
-    label: "Apparel & Accessories",
-    submenu: [{label:"Clothing", url:"/" }, {label:"Accesories", url:"/accesorios" }, {label:"Eyeglasses", url:"/" }]
+    url: "/ropa-accesorios",
+    label: "Ropa y accesorios",
+    submenu: [{label:"Ropa", url:"ropa-accesorios/ropa" }, {label:"Accesorios", url:"ropa-accesorios/accesorios" }, {label:"Gafas", url:"/ropa-accesorios/gafas" }]
   },
   {
     id:1,
-    url: "/",
-    label: "Home & Decor",
+    url: "/hogar-decoracion",
+    label: "Hogar y decoración",
     submenu: []
   },
   {
     id:2,
-    url: "/",
-    label: "More",
-    submenu: [ {label:"About Us", url:"/" }, {label:"FAQ", url:"/" }]
-  }]
+    url: "/mas",
+    label: "Más",
+    submenu: [ {label:"Quienes Somos", url:"/" }, {label:"Preguntas frecuentes", url:"/" }]
+}]
 
 function useDevice() {
     const [windowSize, setWindowSize] = useState(window.innerWidth);

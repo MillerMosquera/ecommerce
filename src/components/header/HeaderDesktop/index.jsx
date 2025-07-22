@@ -1,10 +1,14 @@
-import { ShoppingCart } from 'lucide-react';
+
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { ShoppingCart } from 'lucide-react';
+
 import './style.css';
 
 export default function HeaderDesktop({ items, itemCount, onCartClick }) {
   const [state, setState] = useState(null);
-  
+
   return (
     <>
       <nav className='header_container_left'>
@@ -19,12 +23,13 @@ export default function HeaderDesktop({ items, itemCount, onCartClick }) {
               onMouseOver={() => setState(index)}
               key={item.id}
             >
-              {item.label}
+               <Link to={item.url}> <button>{item.label}</button></Link>
               {state === index && item.submenu.length > 0 && (
                 <ul className='header_submenu'>
                   {item.submenu.map((item2) => (
                     <li className='header_submenu_item' key={item2.url}>
-                      <a href={item2.url}>{item2.label}</a>
+                        <Link to={item2.url}> <button>{item2.label}</button></Link>
+                     
                     </li>
                   ))}
                 </ul>
@@ -47,7 +52,7 @@ export default function HeaderDesktop({ items, itemCount, onCartClick }) {
             </svg>
           </button>
         </div>
-        <button className='header_item header_sign_in'>SIGN IN</button>
+        <button className='header_item header_sign_in'>Iniciar sesion</button>
         <div className="header_cart_container">
           <button 
             className='header_item header_cart_button'
