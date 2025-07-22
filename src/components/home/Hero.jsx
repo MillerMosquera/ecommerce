@@ -52,22 +52,22 @@ export default function Hero() {
 
           <div className=' flex flex-col items-center justify-center'>
             <img title="" sizes="" srcSet="" src="https://storecomponents.vtexassets.com/arquivos/box.png" alt="" className='max-h-[24px] w-1/3'></img>
-            <p> Free Shipping </p>
+            <p> Envio Gratis </p>
           </div>
 
           <div className=' flex flex-col items-center justify-center'>
             <img title="" sizes="" srcSet="" src="https://storecomponents.vtexassets.com/arquivos/delivery-fast.png" alt="" className='max-h-[24px] w-1/3'  loading="eager"></img>
-            <p> One day delivery</p>
+            <p> Entrega el mismo dia </p>
           </div>
 
           <div className=' flex flex-col items-center justify-center'>
             <img title="" sizes="" srcSet="" src="https://storecomponents.vtexassets.com/arquivos/store.png" alt="" className='max-h-[24px] w-1/3' loading="eager" ></img>
-            <p> Pick up in store </p>
+            <p> Recoge en Tienda </p>
           </div>
 
           <div className=' flex flex-col items-center justify-center'>
             <img title="" sizes="" srcSet="" src="https://storecomponents.vtexassets.com/arquivos/coupon.png" alt="" className='max-h-[24px] w-1/3' loading="eager"></img>
-            <p>Exclusive deals</p>
+            <p>Ofertas exclusivas</p>
           </div>
 
         </div>

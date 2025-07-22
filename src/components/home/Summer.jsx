@@ -2,6 +2,8 @@ import { ChevronLeft, ChevronRight, Minus, Plus, Star, X, } from "lucide-react";
 import { useState } from "react";
 import { products } from "../../data/products"
 import SaleCard from "./SaleCard";
+import { SummerCard } from "./components/SummerCard";
+import { SummerModals } from "./components/SummerModals";
 
 export default function Summer() {
 
@@ -31,39 +33,6 @@ export default function Summer() {
         setSelectedProduct(null);
     }
 
-    const incrementQuantity = () => {
-        setQuantity((prevQuantity) => prevQuantity + 1);
-    }
-
-    const decrementQuantity = () => {
-        setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
-    }
-
-    const handleAddToCart = () => {
-        console.log(`Added ${quantity} of ${selectedProduct.name} to cart`);
-        closeModal();
-    }
-
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    }
-
-    const renderStars = (rating) => {
-        return [...Array(5)].map((_, index) => (
-            <Star
-                key={index}
-                size={12}
-                className={`${index < rating
-                    ? 'fill-yellow-400 text-yellow-400'
-                    : 'fill-gray-200 text-gray-200'
-                    }`}
-            />
-        ));
-    };
-
     return (
         <section>
             <div className="max-w-6xl mx-auto p-6 bg-white">
@@ -76,7 +45,6 @@ export default function Summer() {
 
 
                 <div className="relative">
-
                     <button
                         onClick={prevSlide}
                         disabled={currentIndex === 0}
@@ -95,57 +63,9 @@ export default function Summer() {
                             style={{ transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)` }}
                         >
                             {products.map((product) => (
-                                <div key={product.id} className="w-1/4 flex-shrink-0 px-2">
-                                    <div className="bg-white rounded-lg overflow-hidden group">
-
-                                        <div className="relative bg-gray-100 rounded-lg overflow-hidden mb-4">
-                                            {product.category && (
-                                                <span className="absolute top-2 left-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">
-                                                    {product.category}
-                                                </span>
-                                            )}
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <h3 className="font-medium text-gray-800 text-sm">
-                                                {product.name}
-                                            </h3>
-                                            <div className="flex items-center space-x-1">
-                                                {renderStars(product.rating)}
-                                            </div>
-                                            <div className="space-y-1">
-                                                {product.price && (
-                                                    <div className="flex items-center space-x-2">
-                                                        <span className="text-gray-400 line-through text-sm">
-                                                            {formatPrice(product.price)}
-                                                        </span>
-                                                    </div>
-                                                )}
-
-                                                <div className="flex items-center space-x-2">
-                                                    <span className="text-lg font-semibold text-gray-900">
-                                                        {formatPrice(product.price)}
-                                                    </span>
-                                                    {product.discount && (
-                                                        <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">
-                                                            {product.discount}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <button
-                                                onClick={() => openModal(product)}
-                                                className="w-full bg-blue-600 text-white py-2 px-4 rounded font-medium hover:bg-blue-700 transition-colors">
-                                                ADD TO CART
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <SummerCard key={product.id} 
+                                product={product} 
+                                onOpenModal={openModal} />
                             ))}
                         </div>
                     </div>
@@ -175,116 +95,11 @@ export default function Summer() {
                 </div>
 
                 {/* Modal */}
-                {isModalOpen && selectedProduct && (
-                    <div
-                        className="fixed inset-0 bg-black flex items-center justify-center z-50 p-4"
-                        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-                    >
-                        <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
-
-                            <button
-                                onClick={closeModal}
-                                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
-                            >
-                                <X size={20} />
-                            </button>
-
-                            <div className="flex">
-
-                                <div className="w-1/2 p-6">
-                                    <img
-                                        src={selectedProduct.image}
-                                        alt={selectedProduct.name}
-                                        className="w-full h-96 object-cover rounded-lg"
-                                    />
-                                </div>
-
-
-                                <div className="w-1/2 p-6 pt-12">
-                                    <div className="space-y-4">
-                                        <h2 className="text-2xl font-semibold text-gray-800">
-                                            {selectedProduct.name}
-                                        </h2>
-
-
-                                        <div className="flex items-center space-x-1">
-                                            {renderStars(selectedProduct.rating)}
-                                        </div>
-
-                                        <div className="text-3xl font-bold text-gray-900">
-                                            {formatPrice(selectedProduct.price)}
-                                        </div>
-
-                                        {selectedProduct.price && (
-                                            <div className="flex items-center space-x-2">
-                                                <span className="text-gray-400 line-through text-lg">
-                                                    {formatPrice(selectedProduct.price)}
-                                                </span>
-                                                {selectedProduct.discount && (
-                                                    <span className="bg-green-100 text-green-700 text-sm px-2 py-1 rounded">
-                                                        {selectedProduct.discount}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        )}
-                                        <hr className="border-gray-200" />
-
-
-                                        <div className="flex items-center space-x-4">
-                                            <span className="text-sm font-medium text-gray-700">Cantidad:</span>
-                                            <div className="flex items-center space-x-2">
-                                                <button
-                                                    onClick={decrementQuantity}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center  hover:bg-gray-50 transition-colors"
-                                                >
-                                                    <Minus size={14} className=" text-gray-800" />
-                                                </button>
-
-                                                <span className="text-lg font-medium min-w-[80px] text-center">
-                                                    {quantity} {selectedProduct.unit}
-                                                </span>
-
-                                                <button
-                                                    onClick={incrementQuantity}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                                                >
-                                                    <Plus size={14} className=" text-gray-800" />
-                                                </button>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="bg-gray-50 p-4 rounded-lg">
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-gray-700">Total:</span>
-                                                <span className="text-2xl font-bold text-gray-900">
-                                                    {formatPrice(selectedProduct.price * quantity)}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                     
-                                        <div className="space-y-3 pt-4">
-                                            <button
-                                                onClick={handleAddToCart}
-                                                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                                            >
-                                                Agregar al Carrito
-                                            </button>
-
-                                            <button
-                                                onClick={closeModal}
-                                                className="w-full bg-gray-100 text-gray-600 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors"
-                                            >
-                                                Continuar Comprando
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
+               <SummerModals
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                    product={selectedProduct}
+                />
             </div>
             <SaleCard/>
         </section>
