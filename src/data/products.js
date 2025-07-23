@@ -86,7 +86,7 @@ export const products = [
     rating: 3,
     discount: "Ahorra 16.04",
     categories: "ropa-accesorios/accesorios",
-    category: "Accessorios",
+    category: "Reloj",
     brand: "GMC",
     size: ["One Size"],
     season: "verano"
@@ -176,10 +176,10 @@ export const products = [
     price: 349900,
     rating: 4,
     discount: "Ahorra 10.00",
-    categories: "hogar-decoracion/",
+    categories: "hogar-decoracion",
     category: "Silla",
     brand: "Velvet",
-    size: ["58"],
+    size: ["58cm"],
     season: "verano"
   }
 ];
