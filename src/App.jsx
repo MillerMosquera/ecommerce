@@ -6,8 +6,8 @@ import Home from './pages/Home';
 import { SlidingCart } from './components/cart/components/SlidingCart';
 import Accesorios from './pages/Accesorios';
 import WrapCategories from './pages/WrapCategories';
+import NotFoundPage from './pages/NotFoundPage';
 import { useCart } from './components/cart/hooks/useCart';
-
 
 function App() {
   const {
@@ -21,6 +21,7 @@ function App() {
     handleCheckout
   } = useCart();
 
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header 
@@ -30,9 +31,9 @@ function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/accesorios/" element={<Accesorios />} />
-          <Route path="/ropa-accesorios/:subcategoria?" element={<WrapCategories title="Ropa y accesorios" />} />
-          <Route path="/hogar-decoracion/:subcategoria?" element={<WrapCategories title="Hogar y decoración" />} />
+          <Route path="/ropa-accesorios/:subcategoria?" element={<WrapCategories title="Ropa y accesorios" categoria="ropa-accesorios" />} />
+          <Route path="/hogar-decoracion/:subcategoria?" element={<WrapCategories title="Hogar y decoración"  categoria="hogar-decoracion"/>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

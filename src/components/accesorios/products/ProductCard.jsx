@@ -1,6 +1,11 @@
 import { Star } from 'lucide-react';
+const ProductCard = ({ product, viewMode, openModal }) => {
 
-const ProductCard = ({ product, viewMode }) => {
+    const handleAddToCart = (e) => {
+        e.stopPropagation();
+        openModal && openModal(product);
+    };
+
     const renderStars = (rating) => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -24,7 +29,8 @@ const ProductCard = ({ product, viewMode }) => {
 
     if (viewMode !== 'grid') {
         return (
-            <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow">
+            <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow"
+                onClick={() => openModal && openModal(product)}>
                 <div className="flex items-center pl-3">
                     <div className="relative flex-shrink-0">
                         <div className="w-32 h-32 bg-gray-100 rounded-l-lg flex items-center justify-center">
@@ -60,7 +66,8 @@ const ProductCard = ({ product, viewMode }) => {
                             )}
                         </div>
                         <div className="flex items-center">
-                            <button className="bg-blue-600 text-white py-2 px-6 rounded hover:bg-blue-700 transition-colors font-medium">
+                            <button className="bg-blue-600 text-white py-2 px-6 rounded hover:bg-blue-700 transition-colors font-medium"
+                                onClick={handleAddToCart}>
                                 Agregar al Carrito
                             </button>
                         </div>
@@ -71,7 +78,8 @@ const ProductCard = ({ product, viewMode }) => {
     }
 
     return (
-        <div className="bg-white rounded-lg shadow-md border-1 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-lg shadow-md border-1 hover:shadow-md transition-shadow"
+            onClick={() => openModal && openModal(product)}>
             <div className="relative">
                 <div className="aspect-square bg-gray-100 rounded-t-lg flex items-center justify-center">
                     <img
@@ -101,7 +109,8 @@ const ProductCard = ({ product, viewMode }) => {
                 {product.discount && (
                     <div className="text-sm text-green-600 font-medium mb-2">{product.discount}</div>
                 )}
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors font-medium">
+                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors font-medium"
+                    onClick={handleAddToCart}>
                     Agregar al Carrito
                 </button>
             </div>

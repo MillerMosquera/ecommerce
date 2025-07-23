@@ -3,3 +3,8 @@
   padding: 0;
   text-align: center;
 }
+.title_not_found{
+  color: black;
+  font-size: 48px;
+  margin-top: 50px;
+} 

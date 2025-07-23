@@ -1,5 +1,6 @@
 import { Menu, ShoppingCart, X } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 export default function HeaderMobile({ items, itemCount, onCartClick }) {
@@ -15,11 +16,13 @@ export default function HeaderMobile({ items, itemCount, onCartClick }) {
       </button>
       
       <div className="header_mobile_logo">
+        <Link to="/">
         <img 
           src="https://storecomponents.vtexassets.com/arquivos/store-theme-logo.png" 
           alt="Logo" 
           width={120}
         />
+        </Link>
       </div>
       
       <div className="header_mobile_cart">

@@ -31,10 +31,12 @@ export default function HeaderDesktop({ items, onCartClick }) {
       <nav className='header_container_left'>
         <ul className='header_items' onMouseLeave={() => setHovered(null)}>
           <li className='header_item header_logo-desktop'>
-            <img
+            <Link to="/">
+              <img
               src="https://storecomponents.vtexassets.com/arquivos/store-theme-logo.png"
               alt="Logo"
             />
+            </Link>           
           </li>
 
           {items?.map((item, index) => (
