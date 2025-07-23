@@ -19,6 +19,9 @@ export default function ApparelStore() {
         test: true,
         subcategory: true
     });
+    const [ setSelectedProduct] = useState(null);
+    const [ setIsModalOpen] = useState(false);
+    const [ setQuantity] = useState(1);
 
     const filteredProducts = useFilters(
         products,
@@ -27,6 +30,14 @@ export default function ApparelStore() {
         selectedBrands,
         sortBy
     );
+
+    const openModal = (products) => {
+        setSelectedProduct(products);
+        setIsModalOpen(true);
+        setQuantity(1);
+    }
+
+
 
     const toggleFilter = (filterType, value) => {
         const setters = {
@@ -95,8 +106,10 @@ export default function ApparelStore() {
                     <ProductGrid
                         products={filteredProducts}
                         viewMode={viewMode}
+                        openModal={openModal}
                     />
                 </div>
+
             </div>
             {/* Aquí irían los componentes específicos de la tienda de ropa */}
         </div>

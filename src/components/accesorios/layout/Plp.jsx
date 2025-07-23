@@ -5,6 +5,7 @@ import { useFilters } from "../../../hooks/useFilters";
 import ProductGrid from "../products/ProductGrid";
 import SidebarFilters from "../products/SidebarFilter";
 import ToolbarControls from "../products/ToolbarControls";
+import { SummerModals } from "../../home/components/SummerModals";
 
 export default function Plp(props) {
     const [viewMode, setViewMode] = useState('grid');
@@ -19,16 +20,33 @@ export default function Plp(props) {
         test: true,
         subcategory: true
     });
-    
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedProduct(null);
+    }
 
     let filtered = []
- 
-  if (props.subcategoria) {
-    filtered = products.filter(item => item.categories === `ropa-accesorios/${props.subcategoria}`)
-  } else {
-    filtered = products.filter(item => item.categories?.startsWith('ropa-accesorios/'))
-  }
-    console.log('filtered', filtered, props)
+
+
+    if (props.subcategoria) {
+        filtered = products.filter(item => item.categories === `${props.categoria}/${props.subcategoria}`)
+    } else {
+        filtered = products.filter(item =>
+            item.categories?.startsWith(`${props.categoria}`))
+    }
+
+    const aSizes = size(filtered);
+    const aCategories = category(filtered);
+    const aBrands = brand(filtered);
+
     const filteredProducts = useFilters(
         filtered,
         selectedSizes,
@@ -74,7 +92,7 @@ export default function Plp(props) {
                 <span>/</span>
                 <a href={`/${props.title}`}>{props.title}</a>
                 <span>/</span>
-                {props.subcategoria ? <a href={`/${props.title}/${props.subcategoria}`}>{props.subcategoria}</a>: null}
+                {props.subcategoria ? <a href={`/${props.title}/${props.subcategoria}`}>{props.subcategoria}</a> : null}
             </div>
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
@@ -83,9 +101,9 @@ export default function Plp(props) {
             <div className="flex gap-8">
 
                 <SidebarFilters
-                    sizes={size}
-                    categories={category}
-                    brands={brand}
+                    sizes={aSizes}
+                    categories={aCategories}
+                    brands={aBrands}
                     selectedSizes={selectedSizes}
                     selectedCategories={selectedCategories}
                     selectedBrands={selectedBrands}
@@ -106,6 +124,13 @@ export default function Plp(props) {
                     <ProductGrid
                         products={filteredProducts}
                         viewMode={viewMode}
+                        openModal={openModal}
+                    />
+
+                    <SummerModals
+                        isOpen={isModalOpen}
+                        onClose={closeModal}
+                        product={selectedProduct}
                     />
                 </div>
             </div>
