@@ -1,10 +1,10 @@
 // Import Swiper React components
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination , Navigation} from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function Hero() { 
 
@@ -15,9 +15,10 @@ export default function Hero() {
           slidesPerView={1}
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}
+
+          modules={[Pagination , Navigation]}
           
           //paginacion
-          modules={[Pagination]}
           pagination={{clickable:true}}
 
           // navegacion

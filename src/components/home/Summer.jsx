@@ -12,7 +12,7 @@ export default function Summer() {
     const maxIndex = Math.max(0, products.length - slidesToShow);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [quantity, setQuantity] = useState(1);
+    const [setQuantity] = useState(1);
 
     const nextSlide = () => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
